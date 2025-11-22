@@ -219,20 +219,20 @@ def tokenize_and_encode(documents: list) -> list:
         all_tokens.extend(tokenize(doc))
     
     # build vocabulary from all tokens
-    t2i, i2t = make_vocabulary_map(documents)
-
+    token_to_id, id_to_token = make_vocabulary_map(all_tokens)
     
     # encode each document
     encoded_sentences = []
     for doc in documents:
         tokens = tokenize(doc)
-        enc = []
+        encoded = []
         for tok in tokens:
-            enc.append(token_to_id[tok])
+            encoded.append(token_to_id[tok])
         encoded_sentences.append(encoded)
 
     # return encoded sentences and both dictionaries
-    return encoded_sentences, t2i, i2t
+    return encoded_sentences, token_to_id, id_to_token
+
 
 # Test:
 enc, t2i, i2t = tokenize_and_encode([text, 'What a luck we had today!'])
