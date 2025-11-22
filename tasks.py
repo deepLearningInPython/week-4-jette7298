@@ -53,6 +53,7 @@ def tokenize(string: str) -> list:
 
 
 
+
 # -----------------------------------------------
 
 
@@ -102,9 +103,9 @@ print(word_frequencies)
 # -----------------------------------------------
 def token_counts(string: str, k: int = 1) -> dict:
     tokens = tokenize(string)
-    return {word: tokens.count(word)
-            for word in set(tokens)
-            if tokens.count(word) > k}
+    freq = {word: tokens.count(word) for word in set(tokens)}
+    return {word: count for word, count in freq.items() if count >= k}
+
 
     
 
@@ -140,7 +141,15 @@ all(text_hist[key] == value for key, value in token_counts(text).items())
 
 tokens = tokenize(text)
 
-token_to_id = {token: idx for idx, token in enumerate(tokens)}
+# keep first-occurrence order of unique tokens
+unique_tokens = []
+for w in tokens:
+    if w not in unique_tokens:
+        unique_tokens.append(w)
+
+token_to_id = {token: idx for idx, token in enumerate(unique_tokens)}
+print(token_to_id)
+
 
 
 # Expected output: {'dog': 0, 'quick': 1, 'fox': 2, 'the': 3, 'over': 4, 'lazy': 5, 'brown': 6, 'jumps': 7}
