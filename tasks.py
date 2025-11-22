@@ -228,7 +228,7 @@ def tokenize_and_encode(documents: list) -> list:
         tokens = tokenize(doc)
         enc = []
         for tok in tokens:
-            enc.append(t2ioken_to_id[tok])
+            enc.append(token_to_id[tok])
         encoded_sentences.append(encoded)
 
     # return encoded sentences and both dictionaries
