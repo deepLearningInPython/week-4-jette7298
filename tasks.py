@@ -49,8 +49,8 @@ print(tokens)
 def tokenize(string: str) -> list:
     punct = ".,;:?!()[]{}\"'/" 
     clean_text = "".join(ch for ch in string if ch not in punct)
-    tokens = clean_text.lower().split()
-    return sorted(set(tokens))
+    return clean_text.lower().split()
+
 
 
 # -----------------------------------------------
